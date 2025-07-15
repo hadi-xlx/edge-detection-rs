@@ -1,4 +1,4 @@
-use image::{self, GenericImageView};
+use image::{self, GenericImageView,DynamicImage, GrayImage};
 use rayon::prelude::*;
 use std::f32::consts::*;
 use std::*;
@@ -193,13 +193,14 @@ impl Edge {
 /// * If either `strong_threshold` or `weak_threshold` are outisde the range of 0 to 1 inclusive.
 /// * If `strong_threshold` is less than `weak_threshold`.
 /// * If `image` contains no pixels (either it's width or height is 0).
-pub fn canny<T: Into<image::GrayImage>>(
+pub fn canny<T: Into<DynamicImage>>(
     image: T,
     sigma: f32,
     strong_threshold: f32,
     weak_threshold: f32,
 ) -> Detection {
-    let gs_image = image.into();
+    let dyn_img: DynamicImage = image.into();
+    let gs_image: GrayImage    = dyn_img.into_luma8();
     assert!(gs_image.width() > 0);
     assert!(gs_image.height() > 0);
     let edges = detect_edges(&gs_image, sigma);
