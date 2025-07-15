@@ -9,8 +9,8 @@ many computer vision applications.
 
 ```rust
 let source_image = image::open("testdata/line-simple.png")
-    .expect("failed to read image")
-    .to_luma();
+    .expect("failed to read image");
+
 let detection = edge_detection::canny(
     source_image,
     1.2,  // sigma
