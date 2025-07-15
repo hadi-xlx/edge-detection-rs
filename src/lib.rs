@@ -8,8 +8,8 @@
 //!
 //! ```
 //! let source_image = image::open("testdata/line-simple.png")
-//!     .expect("failed to read image")
-//!     .to_luma8();
+//!     .expect("failed to read image");
+//! 
 //! let detection = edge_detection::canny(
 //!     source_image,
 //!     1.2,  // sigma
